@@ -373,7 +373,7 @@ reload_cart:
               case EMERALD:
                 switch (cursor_position) {
                   case 0:
-                    GBA_read_inject_restore(gbatype, NULL, games, language);
+                    GBA_read_inject_restore(gbatype, eon_ticket_E, games, language);
                     break;
                   case 1:
                     GBA_read_inject_restore(gbatype, mystic_ticket_E_jap, games,

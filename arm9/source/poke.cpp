@@ -320,7 +320,7 @@ int me_inject(char *sav, char *me3, SupportedGames games, Language language)
       break;
   }
 
-  if (games == EMERALD && me3 == NULL)  // Emerald Eon Ticket is an in-game event
+  if (games == EMERALD)// Emerald Eon Ticket is an in-game event
   {
     // Enable flag
     sav[(0x49A + 0x1000 * sec[2] + currentSav)] |= 0x01;
