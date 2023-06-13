@@ -236,9 +236,6 @@ int wc_inject(char *sav, char *wc3, SupportedGames games, Language language)
 
 int me_inject(char *sav, char *me3, SupportedGames games, Language language)
 {
-  if (me3 == NULL && language != 0 &&
-      games != EMERALD)  // Only allow NULL card for emerald eon ticket JAP
-    return -4;
 
   unsigned int currentSav = 0, sec[14] = {}, sec0, s0, sx, x;
   int me_offset = 0x0;
@@ -303,20 +300,22 @@ int me_inject(char *sav, char *me3, SupportedGames games, Language language)
       break;
 
     case EMERALD:
-
-      // Mistery Event (only really used by japanese)
-      if ((sav[0x405 + 0x1000 * sec[2] + currentSav] & 0x10) == 0) {
-        printf("Mistery Event is not enabled in savegame!\n");
-        return -2;
-      }
-      /*
+      switch (language) {
+        case JAPANESE:
+          // Mistery Event (only really used by japanese)
+          if ((sav[0x405 + 0x1000 * sec[2] + currentSav] & 0x10) == 0) {
+            printf("Mistery Event is not enabled in savegame!\n");
+            return -2;
+          }
+          break;
+        default:
           //Mistery Gift
           if ( (sav[0x40B + 0x1000 * sec[2] + currentSav]&0x8) == 0)
           {
               printf("Mistery Gift is not enabled in savegame!\n");
               return -3;
           }
-      */
+      }
       break;
   }
 

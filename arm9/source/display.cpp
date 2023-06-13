@@ -396,6 +396,7 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
           iprintf("     Eon Ticket\n");
           iprintf("     Mystic Ticket 2005\n");
           iprintf("     Old Sea Map\n");
+          iprintf("     Aurora Ticket (unofficial)\n");
           break;
         case FIRE_RED_AND_LEAF_GREEN:
           iprintf("     Aurora Ticket 2004\n");
@@ -413,6 +414,7 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
           iprintf("     Aurora Ticket\n");
           iprintf("     Mystic Ticket\n");
           iprintf("     Old Sea Map (unofficial)\n");
+          iprintf("     Eon ticket (unofficial)\n");
           break;
         case FIRE_RED_AND_LEAF_GREEN:
           iprintf("     Aurora Ticket\n");
@@ -429,6 +431,7 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
           iprintf("     Aurora Ticket\n");
           iprintf("     Mystic Ticket (USA)\n");
           iprintf("     Old Sea Map (unofficial)\n");
+          iprintf("     Eon ticket (unofficial)\n");
           break;
         case FIRE_RED_AND_LEAF_GREEN:
           iprintf("     Aurora Ticket\n");

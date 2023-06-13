@@ -287,7 +287,7 @@ reload_cart:
             maxoptions = 0;
             break;
           case EMERALD:
-            maxoptions = 2;
+            maxoptions = 3;
             break;
           case FIRE_RED_AND_LEAF_GREEN:
             maxoptions = 1;
@@ -300,7 +300,7 @@ reload_cart:
             maxoptions = 1;
             break;
           case EMERALD:
-            maxoptions = 2;
+            maxoptions = 3;
             break;
           case FIRE_RED_AND_LEAF_GREEN:
             maxoptions = 1;
@@ -313,7 +313,7 @@ reload_cart:
               maxoptions = 0;
               break;
             case EMERALD:
-              maxoptions = 2;
+              maxoptions = 3;
               break;
             case FIRE_RED_AND_LEAF_GREEN:
               maxoptions = 1;
@@ -373,7 +373,7 @@ reload_cart:
               case EMERALD:
                 switch (cursor_position) {
                   case 0:
-                    GBA_read_inject_restore(gbatype, eon_ticket_E, games, language);
+                    GBA_read_inject_restore(gbatype, eon_ticket_E_jap, games, language);
                     break;
                   case 1:
                     GBA_read_inject_restore(gbatype, mystic_ticket_E_jap, games,
@@ -382,6 +382,10 @@ reload_cart:
                   case 2:
                     GBA_read_inject_restore(gbatype, old_map_jap, games,
                                             language);
+                    break;
+                  case 3:
+                    GBA_read_inject_restore(
+                        gbatype, unofficial_aurora_ticket_E_jap, games, language);
                     break;
                 }
                 break;
@@ -427,6 +431,10 @@ reload_cart:
                     GBA_read_inject_restore(
                         gbatype, unofficial_old_sea_map_E_multi, games, language);
                     break;
+                  case 3:
+                    GBA_read_inject_restore(
+                        gbatype, unofficial_eon_ticket_E_multi, games, language);
+                    break;
                 }
                 break;
               case FIRE_RED_AND_LEAF_GREEN:
@@ -462,6 +470,10 @@ reload_cart:
                   case 2:
                     GBA_read_inject_restore(
                         gbatype, unofficial_old_sea_map_E_multi, games, language);
+                    break;
+                  case 3:
+                    GBA_read_inject_restore(
+                        gbatype, unofficial_eon_ticket_E_multi, games, language);
                     break;
                 }
                 break;
@@ -499,6 +511,10 @@ reload_cart:
                     GBA_read_inject_restore(
                         gbatype, unofficial_old_sea_map_E_multi, games, language);
                     break;
+                  case 3:
+                    GBA_read_inject_restore(
+                        gbatype, unofficial_eon_ticket_E_multi, games, language);
+                    break;
                 }
                 break;
               case FIRE_RED_AND_LEAF_GREEN:
@@ -535,6 +551,10 @@ reload_cart:
                     GBA_read_inject_restore(
                         gbatype, unofficial_old_sea_map_E_multi, games, language);
                     break;
+                  case 3:
+                    GBA_read_inject_restore(
+                        gbatype, unofficial_eon_ticket_E_multi, games, language);
+                    break;
                 }
                 break;
               case FIRE_RED_AND_LEAF_GREEN:
@@ -570,6 +590,10 @@ reload_cart:
                   case 2:
                     GBA_read_inject_restore(
                         gbatype, unofficial_old_sea_map_E_multi, games, language);
+                    break;
+                  case 3:
+                    GBA_read_inject_restore(
+                        gbatype, unofficial_eon_ticket_E_multi, games, language);
                     break;
                 }
                 break;
