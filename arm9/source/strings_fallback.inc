@@ -33,7 +33,7 @@ const char *strings_fallback[STR_LAST] = {
     //
     /* f */
     "Pokemon Generation 3 Event Distribution by suloku and mrhappyasthma.\n"
-    "Version %i.%i.%i%s by wokann.\n\n"
+    "Version %i.%i.%i%s by wokann.\n"
     "Based on DS savegame manager by Pokedoc.",
     /* STR_BOOT_NO_INI */
     "Unable to open ini file!\nPlease make sure that it is\n1. in this apps "
