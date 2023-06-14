@@ -32,7 +32,9 @@ const char *strings_fallback[STR_LAST] = {
     /* STR_STR */ "%s",
     //
     /* f */
-    "Pokemon Generation 3 Event Distribution by suloku and mrhappyasthma.\n"
+    //"GEN3~]#\n"//"宝可梦GEN3自制配信器"
+    "Pokemon Generation 3 Event Distribution\n"
+    "by suloku and mrhappyasthma.\n"
     "Version %i.%i.%i%s by wokann.\n"
     "Based on DS savegame manager by Pokedoc.",
     /* STR_BOOT_NO_INI */

@@ -66,6 +66,7 @@ void displayTitle() {
                   VERSION_EXTRA);
 
   displayStateF(STR_STR, "Press (B) to continue");
+  //displayStateF(STR_STR, "(B)!");//"按(B)!"
   while (!(keysCurrent() & KEY_B))
     ;
 }
@@ -84,6 +85,11 @@ void displayPrintUpper(bool fc) {
   iprintf("Game ID  :\n");
   iprintf("Game name:\n");
   iprintf("Game save:\n");
+  /*
+  iprintf("{@ID     :\n");//"游戏ID     :"
+  iprintf("{@Name   :\n");//"游戏Name   :"
+  iprintf("{@'     :\n");//"游戏存档     :"
+  */
   iprintf("Special  :\n");
   if (dstype == 1) {
     // DSi mode
@@ -95,6 +101,11 @@ void displayPrintUpper(bool fc) {
     iprintf("Game ID  :\n");
     iprintf("Game name:\n");
     iprintf("Game save:\n");
+    /*
+    iprintf("{@ID     :\n");//"游戏ID     :"
+    iprintf("{@Name   :\n");//"游戏Name   :"
+    iprintf("{@'     :\n");//"游戏存档     :"
+    */
     iprintf("Special  :\n");
   }
 
@@ -331,6 +342,7 @@ void displayChangeCart(int mode) {
   iprintf("\n\n");
   if (mode)
     printf("Inserted cartridge is not valid!\n\n");
+    //printf("$=\\!\n\n");//"插入卡带无效!"
   else
     printf("\n\n");
   iprintf("Please insert one of these and\npress START:\n\n");
@@ -339,6 +351,14 @@ void displayChangeCart(int mode) {
   iprintf("     - Pokemon Emerald\n");
   iprintf("     - Pokemon FireRed\n");
   iprintf("     - Pokemon LeafGreen\n");
+  /*
+  iprintf("$START:\n\n");//"插入卡带按START:"
+  iprintf("     -  &\n");//"宝可梦 红宝石"
+  iprintf("     -  &\n");//"宝可梦 蓝宝石"
+  iprintf("     -  &\n");//"宝可梦 绿宝石"
+  iprintf("     -  \n");//"宝可梦 火红"
+  iprintf("     -  _\n");//"宝可梦 叶绿"
+  */
 }
 
 void displayLoadingCart() {
@@ -346,6 +366,7 @@ void displayLoadingCart() {
   consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
   consoleClear();
   printf("Loading cartridge....");
+  //printf("|$ing...");//"载入卡带ing..."
 }
 
 void sleep(int seconds) {
@@ -372,10 +393,23 @@ void displayPrintTicketError(int error) {
     case -3:
       iprintf("Mistery Gift is not enabled\nin savegame!\n");
       break;
-    case -4:
-      iprintf("Eon ticket was only distributed\n in japanese Emerald.\n");
-      break;
   }
+  /*
+  switch (error) {
+    case -1:
+      //"红宝石/蓝宝石/绿宝石/火红/叶绿存档无效"
+      iprintf("&/&/&//_'=\\!\n");
+      break;
+    case -2:
+      //"神秘事件未开"
+      iprintf(",;!\n");
+      break;
+    case -3:
+      //"神秘礼物未开"
+      iprintf("`;!\n");
+      break;
+  }*/
+  
   sleep(5);
 }
 
@@ -390,52 +424,76 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
     case JAPANESE:
       switch (games) {
         case RUBY_AND_SAPPHIRE:
-          iprintf("     Eon Ticket\n");
+          iprintf("    Eon Ticket\n");
+          iprintf("    E-Berry: Pumkin\n");
+          iprintf("    E-Berry: Drash\n");
+          iprintf("    E-Berry: Eggant\n");
+          iprintf("    E-Berry: Strib\n");
+          iprintf("    E-Berry: Chilan\n");
+          iprintf("    E-Berry: Nutpea\n");
+          iprintf("    E-Berry: Ginema\n");
+          iprintf("    E-Berry: Kuo\n");
+          iprintf("    E-Berry: Yago\n");
+          iprintf("    E-Berry: Touga\n");
+          iprintf("    E-Berry: Niniku\n");
+          iprintf("    E-Berry: Topo\n");
           break;
         case EMERALD:
-          iprintf("     Eon Ticket\n");
-          iprintf("     Mystic Ticket 2005\n");
-          iprintf("     Old Sea Map\n");
-          iprintf("     Aurora Ticket (unofficial)\n");
+          iprintf("    Eon Ticket\n");
+          iprintf("    Mystic Ticket 2005\n");
+          iprintf("    Old Sea Map\n");
+          iprintf("    Aurora Ticket (unofficial)\n");
           break;
         case FIRE_RED_AND_LEAF_GREEN:
-          iprintf("     Aurora Ticket 2004\n");
-          iprintf("     Mystic Ticket 2005\n");
+          iprintf("    Aurora Ticket 2004\n");
+          iprintf("    Mystic Ticket 2005\n");
           break;
       }
       break;
     case ENGLISH:
       switch (games) {
         case RUBY_AND_SAPPHIRE:
-          iprintf("     Eon Ticket (e-card)\n");
-          iprintf("     Eon Ticket (nintendo Italy)\n");
+          iprintf("    Eon Ticket (e-card)\n");
+          iprintf("    Eon Ticket (nintendo Italy)\n");
+          iprintf("    E-Berry: Pumkin\n");
+          iprintf("    E-Berry: Drash\n");
+          iprintf("    E-Berry: Eggant\n");
+          iprintf("    E-Berry: Strib\n");
+          iprintf("    E-Berry: Chilan\n");
+          iprintf("    E-Berry: Nutpea\n");
           break;
         case EMERALD:
-          iprintf("     Aurora Ticket\n");
-          iprintf("     Mystic Ticket\n");
-          iprintf("     Old Sea Map (unofficial)\n");
-          iprintf("     Eon ticket (unofficial)\n");
+          iprintf("    Aurora Ticket\n");
+          iprintf("    Mystic Ticket\n");
+          iprintf("    Old Sea Map (unofficial)\n");
+          iprintf("    Eon ticket (unofficial)\n");
           break;
         case FIRE_RED_AND_LEAF_GREEN:
-          iprintf("     Aurora Ticket\n");
-          iprintf("     Mystic Ticket\n");
+          iprintf("    Aurora Ticket\n");
+          iprintf("    Mystic Ticket\n");
           break;
       }
       break;
     default:
       switch (games) {
         case RUBY_AND_SAPPHIRE:
-          iprintf("     Eon Ticket\n");
+          iprintf("    Eon Ticket\n");
+          iprintf("    E-Berry: Pumkin\n");
+          iprintf("    E-Berry: Drash\n");
+          iprintf("    E-Berry: Eggant\n");
+          iprintf("    E-Berry: Strib\n");
+          iprintf("    E-Berry: Chilan\n");
+          iprintf("    E-Berry: Nutpea\n");
           break;
         case EMERALD:
-          iprintf("     Aurora Ticket\n");
-          iprintf("     Mystic Ticket (USA)\n");
-          iprintf("     Old Sea Map (unofficial)\n");
-          iprintf("     Eon ticket (unofficial)\n");
+          iprintf("    Aurora Ticket\n");
+          iprintf("    Mystic Ticket (USA)\n");
+          iprintf("    Old Sea Map (unofficial)\n");
+          iprintf("    Eon ticket (unofficial)\n");
           break;
         case FIRE_RED_AND_LEAF_GREEN:
-          iprintf("     Aurora Ticket\n");
-          iprintf("     Mystic Ticket (USA)\n");
+          iprintf("    Aurora Ticket\n");
+          iprintf("    Mystic Ticket (USA)\n");
           break;
       }
       break;
@@ -450,6 +508,106 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
   }
   iprintf("-->");
 }
+/*
+void displayPrintTickets(int cursor_position, SupportedGames games, Language language) {
+  consoleSelect(&lowerScreen);
+  consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
+  consoleClear();
+
+  iprintf("^}]:\n\n");//"选择配信:"
+//无限船票 \03D\05B\005\022
+//极光船票 \011\00B\005\022
+//神秘船票 \01D\01C\005\022
+//古航海图 \003\03C\00C\012
+
+  switch (language) {
+    case JAPANESE:
+      switch (games) {
+        case RUBY_AND_SAPPHIRE:
+          iprintf("    =[\"\n");//"无限船票"
+          iprintf("    E-Berry: Pumkin\n");
+          iprintf("    E-Berry: Drash\n");
+          iprintf("    E-Berry: Eggant\n");
+          iprintf("    E-Berry: Strib\n");
+          iprintf("    E-Berry: Chilan\n");
+          iprintf("    E-Berry: Nutpea\n");
+          iprintf("    E-Berry: Ginema\n");
+          iprintf("    E-Berry: Kuo\n");
+          iprintf("    E-Berry: Yago\n");
+          iprintf("    E-Berry: Touga\n");
+          iprintf("    E-Berry: Niniku\n");
+          iprintf("    E-Berry: Topo\n");
+          break;
+        case EMERALD:
+          iprintf("    =[\"\n");//"无限船票"
+          iprintf("    \" 2005\n");//"神秘船票 2005"
+          iprintf("    <\n");//"古航海图"
+          iprintf("    \" (unofficial)\n");//"极光船票 (unofficial)"
+          break;
+        case FIRE_RED_AND_LEAF_GREEN:
+          iprintf("    \" 2004\n");//"极光船票 2004"
+          iprintf("    \" 2005\n");//"神秘船票 2005"
+          break;
+      }
+      break;
+    case ENGLISH:
+      switch (games) {
+        case RUBY_AND_SAPPHIRE:
+          iprintf("    =[\" (e-card)\n");//"无限船票 (e-card)"
+          iprintf("    =[\" (nintendo Italy)\n");//"无限船票 (nintendo Italy)"
+          iprintf("    E-Berry: Pumkin\n");
+          iprintf("    E-Berry: Drash\n");
+          iprintf("    E-Berry: Eggant\n");
+          iprintf("    E-Berry: Strib\n");
+          iprintf("    E-Berry: Chilan\n");
+          iprintf("    E-Berry: Nutpea\n");
+          break;
+        case EMERALD:
+          iprintf("    \"\n");//"极光船票"
+          iprintf("    \"\n");//"神秘船票"
+          iprintf("    < (unofficial)\n");//"古航海图 (unofficial)"
+          iprintf("    =[\" (unofficial)\n");//"无限船票 (unofficial)"
+          break;
+        case FIRE_RED_AND_LEAF_GREEN:
+          iprintf("    \"\n");//"极光船票"
+          iprintf("    \"\n");//"神秘船票"
+          break;
+      }
+      break;
+    default:
+      switch (games) {
+        case RUBY_AND_SAPPHIRE:
+          iprintf("    =[\"\n");//"无限船票"
+          iprintf("    E-Berry: Pumkin\n");
+          iprintf("    E-Berry: Drash\n");
+          iprintf("    E-Berry: Eggant\n");
+          iprintf("    E-Berry: Strib\n");
+          iprintf("    E-Berry: Chilan\n");
+          iprintf("    E-Berry: Nutpea\n");
+          break;
+        case EMERALD:
+          iprintf("    \"\n");//"极光船票"
+          iprintf("    \" (USA)\n");//"神秘船票 (USA)"
+          iprintf("    < (unofficial)\n");//"古航海图 (unofficial)"
+          iprintf("    =[\" (unofficial)\n");//"无限船票 (unofficial)"
+          break;
+        case FIRE_RED_AND_LEAF_GREEN:
+          iprintf("    \"\n");//"极光船票"
+          iprintf("    \" (USA)\n");//"神秘船票 (USA)"
+          break;
+      }
+      break;
+  }
+  printf("\n\nSTART");//"按START换卡带"
+  // Print cursor
+  consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
+  iprintf("\n\n");
+  int i = 0;
+  for (i = 0; i < cursor_position; i++) {
+    iprintf("\n");
+  }
+  iprintf("-->");
+}*/
 
 void displayPrintLower(int cursor_position) {
   consoleSelect(&lowerScreen);

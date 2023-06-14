@@ -1005,7 +1005,9 @@ void GBA_read_inject_restore(u8 type, char *ticket, SupportedGames games, Langua
 
   // Inject selected ticket
   int ret = 0;
-  if (ticket[4] == 0x33 || ticket == NULL)  // Mistery Event
+  if (ticket[4] == 0x33 
+  || (ticket[15] == 0x02 && ticket[14] == 0x02 && ticket[13] == 0x8A && ticket[12] == 0xB0)
+  || (ticket[15] == 0x02 && ticket[14] == 0x02 && ticket[13] == 0x8D && ticket[12] == 0x50))  // Mistery Event
     ret = me_inject((char *)data, ticket, games, language);
   else
     ret = wc_inject((char *)data, ticket, games, language);

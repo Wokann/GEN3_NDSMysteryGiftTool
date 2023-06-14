@@ -239,12 +239,14 @@ int me_inject(char *sav, char *me3, SupportedGames games, Language language)
 
   unsigned int currentSav = 0, sec[14] = {}, sec0, s0, sx, x;
   int me_offset = 0x0;
+  int me_berry_offset = 0x0;
 
   switch (language) {
     case JAPANESE:
       switch (games) {
         case RUBY_AND_SAPPHIRE:
           me_offset = ME3_OFFSET_RS;
+          me_berry_offset = 0x2E0;
           break;
         case EMERALD:
           me_offset = ME3_OFFSET_E;
@@ -255,6 +257,7 @@ int me_inject(char *sav, char *me3, SupportedGames games, Language language)
       switch (games) {
         case RUBY_AND_SAPPHIRE:
           me_offset = ME3_OFFSET_RS;
+          me_berry_offset = 0x2E0;
           break;
         case EMERALD:
           me_offset = ME3_OFFSET_E;
@@ -349,6 +352,22 @@ int me_inject(char *sav, char *me3, SupportedGames games, Language language)
     printf("Updating savegame section 4 checksum...(%04X)...", chk);
 
   } else {
+      if ((me3[15] == 0x02 && me3[14] == 0x02 && me3[13] == 0x8A && me3[12] == 0xB0)
+       || (me3[15] == 0x02 && me3[14] == 0x02 && me3[13] == 0x8D && me3[12] == 0x50)) 
+       {
+        // Enable flag
+        sav[(0x41A + 0x1000 * sec[2] + currentSav)] |= 0x01;
+        // Inject e-berry
+        memcpy(sav + (me_berry_offset + 0x1000 * sec[4] + currentSav), me3, 1328);
+
+        // Update section 2 checksums
+        char *ptr = sav + (0x1000 * sec[2] + currentSav);
+        int chk = Chksum(DATALEN, (int *)ptr);
+        sav[(0xFF6 + 0x1000 * sec[2] + currentSav)] = chk & 0x000000FF;
+        sav[(0xFF7 + 0x1000 * sec[2] + currentSav)] = (chk & 0x0000FF00) >> 8;
+        printf("Updating savegame section 2 checksum...(%04X)...", chk);
+       }
+       else{
     // Inject Mistery Event
     if (language == JAPANESE) {
       memcpy(sav + (me_offset + 0x1000 * sec[4] + currentSav), me3,
@@ -359,7 +378,7 @@ int me_inject(char *sav, char *me3, SupportedGames games, Language language)
              1012);  // Script data (chk(4) + association(4) + script(996)) +
                      // item data (8)
     }
-
+    }
     // Update section 4 checksums
     char *ptr = sav + (0x1000 * sec[4] + currentSav);
     int chk = Chksum(DATALEN, (int *)ptr);

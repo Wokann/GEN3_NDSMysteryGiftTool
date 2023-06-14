@@ -284,7 +284,7 @@ reload_cart:
       case JAPANESE:
         switch (games) {
           case RUBY_AND_SAPPHIRE:
-            maxoptions = 0;
+            maxoptions = 12;
             break;
           case EMERALD:
             maxoptions = 3;
@@ -297,7 +297,7 @@ reload_cart:
       case ENGLISH:
         switch (games) {
           case RUBY_AND_SAPPHIRE:
-            maxoptions = 1;
+            maxoptions = 7;
             break;
           case EMERALD:
             maxoptions = 3;
@@ -310,7 +310,7 @@ reload_cart:
       default:
           switch (games) {
             case RUBY_AND_SAPPHIRE:
-              maxoptions = 0;
+              maxoptions = 6;
               break;
             case EMERALD:
               maxoptions = 3;
@@ -367,8 +367,60 @@ reload_cart:
           case JAPANESE:
             switch (games) {
               case RUBY_AND_SAPPHIRE:
-                GBA_read_inject_restore(gbatype, eon_ticket_jap, games,
-                                        language);
+                switch (cursor_position) {
+                  case 0:
+                    GBA_read_inject_restore(gbatype, eon_ticket_jap, games,
+                                            language);
+                    break;
+                  case 1:
+                    GBA_read_inject_restore(gbatype, e_berry_pumkin_jap, games,
+                                            language);
+                    break;
+                  case 2:
+                    GBA_read_inject_restore(gbatype, e_berry_drash_jap, games,
+                                            language);
+                    break;
+                  case 3:
+                    GBA_read_inject_restore(gbatype, e_berry_eggant_jap, games,
+                                            language);
+                    break;
+                  case 4:
+                    GBA_read_inject_restore(gbatype, e_berry_strib_jap, games,
+                                            language);
+                    break;
+                  case 5:
+                    GBA_read_inject_restore(gbatype, e_berry_chilan_jap, games,
+                                            language);
+                    break;
+                  case 6:
+                    GBA_read_inject_restore(gbatype, e_berry_nutpea_jap, games,
+                                            language);
+                    break;
+                  case 7:
+                    GBA_read_inject_restore(gbatype, e_berry_ginema_jap, games,
+                                            language);
+                    break;
+                  case 8:
+                    GBA_read_inject_restore(gbatype, e_berry_kuo_jap, games,
+                                            language);
+                    break;
+                  case 9:
+                    GBA_read_inject_restore(gbatype, e_berry_yago_jap, games,
+                                            language);
+                    break;
+                  case 10:
+                    GBA_read_inject_restore(gbatype, e_berry_touga_jap, games,
+                                            language);
+                    break;
+                  case 11:
+                    GBA_read_inject_restore(gbatype, e_berry_niniku_jap, games,
+                                            language);
+                    break;
+                  case 12:
+                    GBA_read_inject_restore(gbatype, e_berry_topo_jap, games,
+                                            language);
+                    break;
+                }
                 break;
               case EMERALD:
                 switch (cursor_position) {
@@ -415,6 +467,30 @@ reload_cart:
                     GBA_read_inject_restore(gbatype, eon_ticket_ninti_eng, games,
                                             language);
                     break;
+                  case 2:
+                    GBA_read_inject_restore(gbatype, e_berry_pumkin_eng, games,
+                                            language);
+                    break;
+                  case 3:
+                    GBA_read_inject_restore(gbatype, e_berry_drash_eng, games,
+                                            language);
+                    break;
+                  case 4:
+                    GBA_read_inject_restore(gbatype, e_berry_eggant_eng, games,
+                                            language);
+                    break;
+                  case 5:
+                    GBA_read_inject_restore(gbatype, e_berry_strib_eng, games,
+                                            language);
+                    break;
+                  case 6:
+                    GBA_read_inject_restore(gbatype, e_berry_chilan_eng, games,
+                                            language);
+                    break;
+                  case 7:
+                    GBA_read_inject_restore(gbatype, e_berry_nutpea_eng, games,
+                                            language);
+                    break;
                 }
                 break;
               case EMERALD:
@@ -454,8 +530,36 @@ reload_cart:
           case FRENCH:
             switch (games) {
               case RUBY_AND_SAPPHIRE:
-                GBA_read_inject_restore(gbatype, eon_ticket_ninti_fre, games,
-                                        language);
+                switch (cursor_position) {
+                  case 0:
+                    GBA_read_inject_restore(gbatype, eon_ticket_ninti_fre, games,
+                                            language);
+                    break;
+                  case 1:
+                    GBA_read_inject_restore(gbatype, e_berry_pumkin_eng, games,
+                                            language);
+                    break;
+                  case 2:
+                    GBA_read_inject_restore(gbatype, e_berry_drash_eng, games,
+                                            language);
+                    break;
+                  case 3:
+                    GBA_read_inject_restore(gbatype, e_berry_eggant_eng, games,
+                                            language);
+                    break;
+                  case 4:
+                    GBA_read_inject_restore(gbatype, e_berry_strib_eng, games,
+                                            language);
+                    break;
+                  case 5:
+                    GBA_read_inject_restore(gbatype, e_berry_chilan_eng, games,
+                                            language);
+                    break;
+                  case 6:
+                    GBA_read_inject_restore(gbatype, e_berry_nutpea_eng, games,
+                                            language);
+                    break;
+                }
                 break;
               case EMERALD:
                 switch (cursor_position) {
@@ -494,8 +598,36 @@ reload_cart:
           case ITALIAN:
             switch (games) {
               case RUBY_AND_SAPPHIRE:
-                GBA_read_inject_restore(gbatype, eon_ticket_ninti_ita, games,
-                                        language);
+                switch (cursor_position) {
+                  case 0:
+                    GBA_read_inject_restore(gbatype, eon_ticket_ninti_ita, games,
+                                            language);
+                    break;
+                  case 1:
+                    GBA_read_inject_restore(gbatype, e_berry_pumkin_eng, games,
+                                            language);
+                    break;
+                  case 2:
+                    GBA_read_inject_restore(gbatype, e_berry_drash_eng, games,
+                                            language);
+                    break;
+                  case 3:
+                    GBA_read_inject_restore(gbatype, e_berry_eggant_eng, games,
+                                            language);
+                    break;
+                  case 4:
+                    GBA_read_inject_restore(gbatype, e_berry_strib_eng, games,
+                                            language);
+                    break;
+                  case 5:
+                    GBA_read_inject_restore(gbatype, e_berry_chilan_eng, games,
+                                            language);
+                    break;
+                  case 6:
+                    GBA_read_inject_restore(gbatype, e_berry_nutpea_eng, games,
+                                            language);
+                    break;
+                }
                 break;
               case EMERALD:
                 switch (cursor_position) {
@@ -534,8 +666,36 @@ reload_cart:
           case GERMAN:
             switch (games) {
               case RUBY_AND_SAPPHIRE:
-                GBA_read_inject_restore(gbatype, eon_ticket_ninti_ger, games,
-                                        language);
+                switch (cursor_position) {
+                  case 0:
+                    GBA_read_inject_restore(gbatype, eon_ticket_ninti_ger, games,
+                                            language);
+                    break;
+                  case 1:
+                    GBA_read_inject_restore(gbatype, e_berry_pumkin_eng, games,
+                                            language);
+                    break;
+                  case 2:
+                    GBA_read_inject_restore(gbatype, e_berry_drash_eng, games,
+                                            language);
+                    break;
+                  case 3:
+                    GBA_read_inject_restore(gbatype, e_berry_eggant_eng, games,
+                                            language);
+                    break;
+                  case 4:
+                    GBA_read_inject_restore(gbatype, e_berry_strib_eng, games,
+                                            language);
+                    break;
+                  case 5:
+                    GBA_read_inject_restore(gbatype, e_berry_chilan_eng, games,
+                                            language);
+                    break;
+                  case 6:
+                    GBA_read_inject_restore(gbatype, e_berry_nutpea_eng, games,
+                                            language);
+                    break;
+                }
                 break;
               case EMERALD:
                 switch (cursor_position) {
@@ -574,8 +734,36 @@ reload_cart:
           case SPANISH:
             switch (games) {
               case RUBY_AND_SAPPHIRE:
-                GBA_read_inject_restore(gbatype, eon_ticket_ninti_esp, games,
-                                        language);
+                switch (cursor_position) {
+                  case 0:
+                    GBA_read_inject_restore(gbatype, eon_ticket_ninti_esp, games,
+                                            language);
+                    break;
+                  case 1:
+                    GBA_read_inject_restore(gbatype, e_berry_pumkin_eng, games,
+                                            language);
+                    break;
+                  case 2:
+                    GBA_read_inject_restore(gbatype, e_berry_drash_eng, games,
+                                            language);
+                    break;
+                  case 3:
+                    GBA_read_inject_restore(gbatype, e_berry_eggant_eng, games,
+                                            language);
+                    break;
+                  case 4:
+                    GBA_read_inject_restore(gbatype, e_berry_strib_eng, games,
+                                            language);
+                    break;
+                  case 5:
+                    GBA_read_inject_restore(gbatype, e_berry_chilan_eng, games,
+                                            language);
+                    break;
+                  case 6:
+                    GBA_read_inject_restore(gbatype, e_berry_nutpea_eng, games,
+                                            language);
+                    break;
+                }
                 break;
               case EMERALD:
                 switch (cursor_position) {
