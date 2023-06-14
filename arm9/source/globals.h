@@ -31,9 +31,9 @@
 #include "auxspi.h"
 
 #define VERSION_MAJOR 1
-#define VERSION_MINOR 1
+#define VERSION_MINOR 2
 #define VERSION_MICRO 0
-#define VERSION_EXTRA ""
+#define VERSION_EXTRA "-ENG"//CHS
 
 // this enables a custom font. it does not work yet, stuff is missing, so please
 // uncomment

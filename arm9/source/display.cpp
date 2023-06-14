@@ -61,12 +61,15 @@ void displayInit() {
               true);
 }
 
+//===========================================================
+//ENG_TEXT_START
+//===========================================================
+
 void displayTitle() {
   displayMessageF(STR_TITLE_MSG, VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO,
                   VERSION_EXTRA);
 
   displayStateF(STR_STR, "Press (B) to continue");
-  //displayStateF(STR_STR, "(B)!");//"按(B)!"
   while (!(keysCurrent() & KEY_B))
     ;
 }
@@ -85,11 +88,6 @@ void displayPrintUpper(bool fc) {
   iprintf("Game ID  :\n");
   iprintf("Game name:\n");
   iprintf("Game save:\n");
-  /*
-  iprintf("{@ID     :\n");//"游戏ID     :"
-  iprintf("{@Name   :\n");//"游戏Name   :"
-  iprintf("{@'     :\n");//"游戏存档     :"
-  */
   iprintf("Special  :\n");
   if (dstype == 1) {
     // DSi mode
@@ -101,11 +99,427 @@ void displayPrintUpper(bool fc) {
     iprintf("Game ID  :\n");
     iprintf("Game name:\n");
     iprintf("Game save:\n");
-    /*
+    iprintf("Special  :\n");
+  }
+
+  // print upper screen
+  consoleSetWindow(&upperScreen, 10, 3, 22, 4);
+  consoleClear();
+  consoleSetWindow(&upperScreen, 10, 8, 22, 4);
+  consoleClear();
+
+  // fetch cartridge header (maybe, calling "cardReadHeader" on a FC messes with
+  // libfat!)
+  sNDSHeader nds;
+  if (!fc && (slot_1_type != AUXSPI_FLASH_CARD))
+    cardReadHeader((uint8 *)&nds);
+  else
+    slot_1_type = AUXSPI_FLASH_CARD;
+
+  char name[MAXPATHLEN];
+  // 0) print the mode
+  consoleSetWindow(&upperScreen, 10, 0, 20, 1);
+  switch (mode) {
+    case 0:
+      sprintf(&name[0], "WiFi/FTP");
+      break;
+    case 1:
+      sprintf(&name[0], "GBA");
+      break;
+    case 2:
+      sprintf(&name[0], "3in1");
+      break;
+    case 3:
+      if (sdslot) {
+        sprintf(&name[0], "DSi/SD");
+      } else {
+        sprintf(&name[0], "DSi/iEvo");
+      }
+      break;
+    case 4:
+      sprintf(&name[0], "Slot 2");
+      break;
+    case 5:
+      sprintf(&name[0], "Download Play");
+      break;
+    default:
+      sprintf(&name[0], "* ??? *");
+      break;
+  }
+  consoleClear();
+  iprintf("%s", name);
+  // 0.5) memory buffer size
+  consoleSetWindow(&upperScreen, 10, 1, 20, 1);
+  iprintf("%lu kB", size_buf >> 10);
+
+  // 1) The cart id.
+  consoleSetWindow(&upperScreen, 10, 3, 22, 1);
+  sprintf(&name[0], "----");
+  if (slot_1_type == AUXSPI_FLASH_CARD) {
+    sprintf(&name[0], "Flash Card");
+  } else {
+    memcpy(&name[0], &nds.gameCode[0], 4);
+    name[4] = 0x00;
+  }
+  if (dstype == 1) sprintf(name, "LOCKED");
+  consoleClear();
+  iprintf("%s", name);
+
+  // 2) The cart name.
+  consoleSetWindow(&upperScreen, 10, 4, 22, 1);
+  sprintf(&name[0], "----");
+  if (slot_1_type == AUXSPI_FLASH_CARD) {
+    sprintf(&name[0], "Flash Card");
+  } else {
+    memcpy(&name[0], &nds.gameTitle[0], 12);
+    name[12] = 0x00;
+  }
+  if (dstype == 1) sprintf(name, "LOCKED");
+  consoleClear();
+  iprintf("%s", name);
+
+  // 3) The save type
+  consoleSetWindow(&upperScreen, 10, 5, 22, 1);
+  sprintf(&name[0], "----");
+  if (slot_1_type == AUXSPI_FLASH_CARD) {
+    sprintf(&name[0], "Flash Card");
+  } else {
+    uint8 type = auxspi_save_type(slot_1_type);
+    uint8 size = auxspi_save_size_log_2(slot_1_type);
+    // some debug output may need this so iprintf prints to the correct region
+    consoleSetWindow(&upperScreen, 10, 5, 22, 1);
+    switch (type) {
+      case 1:
+        sprintf(&name[0], "Eeprom (%i Bytes)", size);
+        break;
+      case 2:
+        sprintf(&name[0], "FRAM (%i kB)", 1 << (size - 10));
+        break;
+      case 3:
+        if (size == 0)
+          sprintf(&name[0], "Flash (ID:%lx)",
+                  auxspi_save_jedec_id(slot_1_type));
+        else
+          sprintf(&name[0], "Flash (%i kB)", 1 << (size - 10));
+        break;
+      default:
+        sprintf(&name[0], "???");
+        break;
+    }
+  }
+  if (dstype == 1) sprintf(name, "LOCKED");
+  consoleClear();
+  iprintf("%s", name);
+
+  // 4) Special properties (infrared device...)
+  consoleSetWindow(&upperScreen, 10, 6, 22, 1);
+  consoleClear();
+  memset(&name[0], 0, MAXPATHLEN);
+  switch (slot_1_type) {
+    case AUXSPI_INFRARED:
+      sprintf(&name[0], "Infrared");
+      break;
+    case AUXSPI_BBDX:
+      sprintf(name, "XXL");
+      break;
+    case AUXSPI_BLUETOOTH:
+      sprintf(name, "Bluetooth");
+      break;
+    default:
+      sprintf(&name[0], "----");
+  }
+  if (dstype == 1) sprintf(name, "LOCKED");
+  consoleClear();
+  iprintf("%s", name);
+
+  // Slot 2/SD status
+  if (dstype == 1) {
+    consoleSetWindow(&upperScreen, 10, 8, 22, 1);
+    consoleClear();
+    memset(&name[0], 0, MAXPATHLEN);
+    // Test if we booted from sudokuhax/DSi Homebrew Channel,
+    //  which means that the SD-slot is accessible.
+    if (sdslot)
+      iprintf("Available.");
+    else
+      iprintf("LOCKED.");
+
+    return;
+  }
+  // 5) GBA game id
+  consoleSetWindow(&upperScreen, 10, 8, 22, 1);
+  consoleClear();
+  memset(&name[0], 0, MAXPATHLEN);
+  if (ezflash) {
+    if (ezflash == 0x89168916)
+      sprintf(name, "3in1 (512M)");
+    else if (ezflash == 0x227E2218)
+      sprintf(name, "3in1 (256M V2)");
+    else if (ezflash == 0x227E2202)
+      sprintf(name, "3in1 (256M V1)");
+    else
+      sprintf(name, "3in1 (???M)");
+  } else if (gba)
+    sprintf(name, "%.4s", (char *)0x080000ac);
+  else if (slot2 > 0)
+    sprintf(name, "Flash Card");
+  else if (dstype == 0)
+    sprintf(name, "----");
+  if (dstype == 0) iprintf("%s", name);
+
+  // 6) GBA game name
+  consoleSetWindow(&upperScreen, 10, 9, 22, 1);
+  consoleClear();
+  memset(&name[0], 0, MAXPATHLEN);
+  if (ezflash)
+    sprintf(name, "3in1");
+  else if (gba)
+    sprintf(name, "%.12s", (char *)0x080000a0);
+  else if (slot2 > 0)
+    sprintf(name, "Flash Card");
+  else if (dstype == 0)
+    sprintf(name, "----");
+  if (dstype == 0) iprintf(name);
+
+  // 7) GBA save size
+  consoleSetWindow(&upperScreen, 10, 10, 22, 1);
+  consoleClear();
+  memset(&name[0], 0, MAXPATHLEN);
+  if (ezflash)
+    sprintf(name, "SRAM");
+  else if (gba) {
+    saveTypeGBA type = GetSlot2SaveType(CART_GBA_GAME);
+    u8 size = gbaGetSaveSizeLog2(type);
+    switch (type) {
+      case SAVE_GBA_EEPROM_05:
+      case SAVE_GBA_EEPROM_8:
+        sprintf(name, "EEPROM (%i bytes)", 1 << size);
+        break;
+      case SAVE_GBA_SRAM_32:
+        sprintf(name, "SRAM (%i kB)", 1 << (size - 10));
+        break;
+      case SAVE_GBA_FLASH_64:
+      case SAVE_GBA_FLASH_128:
+        sprintf(name, "Flash (%i kB)", 1 << (size - 10));
+        break;
+      default:
+        sprintf(name, "(none)");
+    }
+  } else if (slot2 > 0)
+    sprintf(name, "Flash Card");
+  else if (dstype == 0)
+    sprintf(name, "----");
+  if (dstype == 0) iprintf(name);
+
+  // 8) GBA special stuff
+  consoleSetWindow(&upperScreen, 10, 11, 22, 1);
+  consoleClear();
+  memset(&name[0], 0, MAXPATHLEN);
+  if (ezflash)
+    sprintf(name, "NOR + PSRAM");
+  else if (gba)
+    // TODO: test for RTC, add function for syncing RTC?
+    sprintf(name, "???");
+  else if (slot2 > 0)
+    sprintf(name, "----");
+  else if (dstype == 0)
+    sprintf(name, "----");
+  if (dstype == 0) iprintf(name);
+}
+//ENG_TEXT
+void displayChangeCart(int mode) {
+  consoleSelect(&lowerScreen);
+  consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
+  consoleClear();
+
+  iprintf("\n\n");
+  if (mode)
+    printf("Inserted cartridge is not valid!\n\n");
+  else
+    printf("\n\n");
+  iprintf("Please insert one of these and\npress START:\n\n");
+  iprintf("     - Pokemon Ruby\n");
+  iprintf("     - Pokemon Sapphire\n");
+  iprintf("     - Pokemon Emerald\n");
+  iprintf("     - Pokemon FireRed\n");
+  iprintf("     - Pokemon LeafGreen\n");  
+}
+
+void displayLoadingCart() {
+  consoleSelect(&lowerScreen);
+  consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
+  consoleClear();
+  printf("Loading cartridge....");
+}
+
+void sleep(int seconds) {
+  time_t calltime = time(NULL);
+  time_t timenow;
+
+  while (true) {
+    timenow = time(NULL);
+    if (timenow - calltime >= seconds) break;
+  }
+}
+void displayPrintTicketError(int error) {
+  consoleSelect(&lowerScreen);
+  consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
+  consoleClear();
+  iprintf("\n\n\n\n\n\n\n\n\n\n");
+  switch (error) {
+    case -1:
+      iprintf("This is not a valid\nRu/Sa/Em/FR/LG save file!\n");
+      break;
+    case -2:
+      iprintf("Mistery Event is not enabled\nin savegame!\n");
+      break;
+    case -3:
+      iprintf("Mistery Gift is not enabled\nin savegame!\n");
+      break;
+  }
+  
+  sleep(5);
+}
+
+void displayPrintTickets(int cursor_position, SupportedGames games, Language language) {
+  consoleSelect(&lowerScreen);
+  consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
+  consoleClear();
+
+  iprintf("Select your event:\n\n");
+
+  switch (language) {
+    case JAPANESE:
+      switch (games) {
+        case RUBY_AND_SAPPHIRE:
+          iprintf("    Eon Ticket\n");
+          iprintf("    E-Berry: Pumkin\n");
+          iprintf("    E-Berry: Drash\n");
+          iprintf("    E-Berry: Eggant\n");
+          iprintf("    E-Berry: Strib\n");
+          iprintf("    E-Berry: Chilan\n");
+          iprintf("    E-Berry: Nutpea\n");
+          iprintf("    E-Berry: Ginema\n");
+          iprintf("    E-Berry: Kuo\n");
+          iprintf("    E-Berry: Yago\n");
+          iprintf("    E-Berry: Touga\n");
+          iprintf("    E-Berry: Niniku\n");
+          iprintf("    E-Berry: Topo\n");
+          break;
+        case EMERALD:
+          iprintf("    Eon Ticket\n");
+          iprintf("    Mystic Ticket 2005\n");
+          iprintf("    Old Sea Map\n");
+          iprintf("    Aurora Ticket (unofficial)\n");
+          break;
+        case FIRE_RED_AND_LEAF_GREEN:
+          iprintf("    Aurora Ticket 2004\n");
+          iprintf("    Mystic Ticket 2005\n");
+          break;
+      }
+      break;
+    case ENGLISH:
+      switch (games) {
+        case RUBY_AND_SAPPHIRE:
+          iprintf("    Eon Ticket (e-card)\n");
+          iprintf("    Eon Ticket (nintendo Italy)\n");
+          iprintf("    E-Berry: Pumkin\n");
+          iprintf("    E-Berry: Drash\n");
+          iprintf("    E-Berry: Eggant\n");
+          iprintf("    E-Berry: Strib\n");
+          iprintf("    E-Berry: Chilan\n");
+          iprintf("    E-Berry: Nutpea\n");
+          break;
+        case EMERALD:
+          iprintf("    Aurora Ticket\n");
+          iprintf("    Mystic Ticket\n");
+          iprintf("    Old Sea Map (unofficial)\n");
+          iprintf("    Eon ticket (unofficial)\n");
+          break;
+        case FIRE_RED_AND_LEAF_GREEN:
+          iprintf("    Aurora Ticket\n");
+          iprintf("    Mystic Ticket\n");
+          break;
+      }
+      break;
+    default:
+      switch (games) {
+        case RUBY_AND_SAPPHIRE:
+          iprintf("    Eon Ticket\n");
+          iprintf("    E-Berry: Pumkin\n");
+          iprintf("    E-Berry: Drash\n");
+          iprintf("    E-Berry: Eggant\n");
+          iprintf("    E-Berry: Strib\n");
+          iprintf("    E-Berry: Chilan\n");
+          iprintf("    E-Berry: Nutpea\n");
+          break;
+        case EMERALD:
+          iprintf("    Aurora Ticket\n");
+          iprintf("    Mystic Ticket (USA)\n");
+          iprintf("    Old Sea Map (unofficial)\n");
+          iprintf("    Eon ticket (unofficial)\n");
+          break;
+        case FIRE_RED_AND_LEAF_GREEN:
+          iprintf("    Aurora Ticket\n");
+          iprintf("    Mystic Ticket (USA)\n");
+          break;
+      }
+      break;
+  }
+  printf("\n\nPress START to change cartridge");
+  // Print cursor
+  consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
+  iprintf("\n\n");
+  int i = 0;
+  for (i = 0; i < cursor_position; i++) {
+    iprintf("\n");
+  }
+  iprintf("-->");
+}
+
+//===========================================================
+//ENG_TEXT_END
+//===========================================================
+
+//===========================================================
+//CHS_TEXT_START
+//===========================================================
+/*
+void displayTitle() {
+  displayMessageF(STR_TITLE_MSG, VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO,
+                  VERSION_EXTRA);
+
+  displayStateF(STR_STR, "(B)!");//"按(B)!"
+  while (!(keysCurrent() & KEY_B))
+    ;
+}
+
+void displayPrintUpper(bool fc) {
+  bool gba = (mode == 1);
+  u32 dstype = (mode == 3) ? 1 : 0;
+
+  // print upper screen (background)
+  consoleSelect(&upperScreen);
+  consoleSetWindow(&upperScreen, 0, 0, 32, 24);
+  consoleClear();
+  iprintf("Mode     :\n");
+  iprintf("Memory   :\n");
+  iprintf("--- SLOT 1 ---------------------");
+  iprintf("{@ID     :\n");//"游戏ID     :"
+  iprintf("{@Name   :\n");//"游戏Name   :"
+  iprintf("{@'     :\n");//"游戏存档     :"
+  iprintf("Special  :\n");
+  if (dstype == 1) {
+    // DSi mode
+    iprintf("--- SD-SLOT --------------------");
+    iprintf("Status   :\n");
+  } else {
+    // old DS phat/lite
+    iprintf("--- SLOT 2 ---------------------");
     iprintf("{@ID     :\n");//"游戏ID     :"
     iprintf("{@Name   :\n");//"游戏Name   :"
     iprintf("{@'     :\n");//"游戏存档     :"
-    */
+    
     iprintf("Special  :\n");
   }
 
@@ -341,32 +755,23 @@ void displayChangeCart(int mode) {
 
   iprintf("\n\n");
   if (mode)
-    printf("Inserted cartridge is not valid!\n\n");
-    //printf("$=\\!\n\n");//"插入卡带无效!"
+    printf("$=\\!\n\n");//"插入卡带无效!"
   else
     printf("\n\n");
-  iprintf("Please insert one of these and\npress START:\n\n");
-  iprintf("     - Pokemon Ruby\n");
-  iprintf("     - Pokemon Sapphire\n");
-  iprintf("     - Pokemon Emerald\n");
-  iprintf("     - Pokemon FireRed\n");
-  iprintf("     - Pokemon LeafGreen\n");
-  /*
   iprintf("$START:\n\n");//"插入卡带按START:"
   iprintf("     -  &\n");//"宝可梦 红宝石"
   iprintf("     -  &\n");//"宝可梦 蓝宝石"
   iprintf("     -  &\n");//"宝可梦 绿宝石"
   iprintf("     -  \n");//"宝可梦 火红"
   iprintf("     -  _\n");//"宝可梦 叶绿"
-  */
+  
 }
 
 void displayLoadingCart() {
   consoleSelect(&lowerScreen);
   consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
   consoleClear();
-  printf("Loading cartridge....");
-  //printf("|$ing...");//"载入卡带ing..."
+  printf("|$ing...");//"载入卡带ing..."
 }
 
 void sleep(int seconds) {
@@ -385,18 +790,6 @@ void displayPrintTicketError(int error) {
   iprintf("\n\n\n\n\n\n\n\n\n\n");
   switch (error) {
     case -1:
-      iprintf("This is not a valid\nRu/Sa/Em/FR/LG save file!\n");
-      break;
-    case -2:
-      iprintf("Mistery Event is not enabled\nin savegame!\n");
-      break;
-    case -3:
-      iprintf("Mistery Gift is not enabled\nin savegame!\n");
-      break;
-  }
-  /*
-  switch (error) {
-    case -1:
       //"红宝石/蓝宝石/绿宝石/火红/叶绿存档无效"
       iprintf("&/&/&//_'=\\!\n");
       break;
@@ -408,107 +801,11 @@ void displayPrintTicketError(int error) {
       //"神秘礼物未开"
       iprintf("`;!\n");
       break;
-  }*/
+  }
   
   sleep(5);
 }
 
-void displayPrintTickets(int cursor_position, SupportedGames games, Language language) {
-  consoleSelect(&lowerScreen);
-  consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
-  consoleClear();
-
-  iprintf("Select your event:\n\n");
-
-  switch (language) {
-    case JAPANESE:
-      switch (games) {
-        case RUBY_AND_SAPPHIRE:
-          iprintf("    Eon Ticket\n");
-          iprintf("    E-Berry: Pumkin\n");
-          iprintf("    E-Berry: Drash\n");
-          iprintf("    E-Berry: Eggant\n");
-          iprintf("    E-Berry: Strib\n");
-          iprintf("    E-Berry: Chilan\n");
-          iprintf("    E-Berry: Nutpea\n");
-          iprintf("    E-Berry: Ginema\n");
-          iprintf("    E-Berry: Kuo\n");
-          iprintf("    E-Berry: Yago\n");
-          iprintf("    E-Berry: Touga\n");
-          iprintf("    E-Berry: Niniku\n");
-          iprintf("    E-Berry: Topo\n");
-          break;
-        case EMERALD:
-          iprintf("    Eon Ticket\n");
-          iprintf("    Mystic Ticket 2005\n");
-          iprintf("    Old Sea Map\n");
-          iprintf("    Aurora Ticket (unofficial)\n");
-          break;
-        case FIRE_RED_AND_LEAF_GREEN:
-          iprintf("    Aurora Ticket 2004\n");
-          iprintf("    Mystic Ticket 2005\n");
-          break;
-      }
-      break;
-    case ENGLISH:
-      switch (games) {
-        case RUBY_AND_SAPPHIRE:
-          iprintf("    Eon Ticket (e-card)\n");
-          iprintf("    Eon Ticket (nintendo Italy)\n");
-          iprintf("    E-Berry: Pumkin\n");
-          iprintf("    E-Berry: Drash\n");
-          iprintf("    E-Berry: Eggant\n");
-          iprintf("    E-Berry: Strib\n");
-          iprintf("    E-Berry: Chilan\n");
-          iprintf("    E-Berry: Nutpea\n");
-          break;
-        case EMERALD:
-          iprintf("    Aurora Ticket\n");
-          iprintf("    Mystic Ticket\n");
-          iprintf("    Old Sea Map (unofficial)\n");
-          iprintf("    Eon ticket (unofficial)\n");
-          break;
-        case FIRE_RED_AND_LEAF_GREEN:
-          iprintf("    Aurora Ticket\n");
-          iprintf("    Mystic Ticket\n");
-          break;
-      }
-      break;
-    default:
-      switch (games) {
-        case RUBY_AND_SAPPHIRE:
-          iprintf("    Eon Ticket\n");
-          iprintf("    E-Berry: Pumkin\n");
-          iprintf("    E-Berry: Drash\n");
-          iprintf("    E-Berry: Eggant\n");
-          iprintf("    E-Berry: Strib\n");
-          iprintf("    E-Berry: Chilan\n");
-          iprintf("    E-Berry: Nutpea\n");
-          break;
-        case EMERALD:
-          iprintf("    Aurora Ticket\n");
-          iprintf("    Mystic Ticket (USA)\n");
-          iprintf("    Old Sea Map (unofficial)\n");
-          iprintf("    Eon ticket (unofficial)\n");
-          break;
-        case FIRE_RED_AND_LEAF_GREEN:
-          iprintf("    Aurora Ticket\n");
-          iprintf("    Mystic Ticket (USA)\n");
-          break;
-      }
-      break;
-  }
-  printf("\n\nPress START to change cartridge");
-  // Print cursor
-  consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
-  iprintf("\n\n");
-  int i = 0;
-  for (i = 0; i < cursor_position; i++) {
-    iprintf("\n");
-  }
-  iprintf("-->");
-}
-/*
 void displayPrintTickets(int cursor_position, SupportedGames games, Language language) {
   consoleSelect(&lowerScreen);
   consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
@@ -607,7 +904,11 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
     iprintf("\n");
   }
   iprintf("-->");
-}*/
+}
+*/
+//===========================================================
+//CHS_TEXT_END
+//===========================================================
 
 void displayPrintLower(int cursor_position) {
   consoleSelect(&lowerScreen);
