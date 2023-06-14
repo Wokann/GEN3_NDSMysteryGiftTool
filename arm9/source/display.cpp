@@ -346,8 +346,8 @@ void displayChangeCart(int mode) {
   else
     printf("\n\n");
   iprintf("Please insert one of these and\npress START:\n\n");
-  iprintf("     - Pokemon Rubi\n");
-  iprintf("     - Pokemon Saphire\n");
+  iprintf("     - Pokemon Ruby\n");
+  iprintf("     - Pokemon Sapphire\n");
   iprintf("     - Pokemon Emerald\n");
   iprintf("     - Pokemon FireRed\n");
   iprintf("     - Pokemon LeafGreen\n");
