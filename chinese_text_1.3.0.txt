@@ -1,0 +1,62 @@
+宝可梦GEN3自制配信器 by suloku.
+Version 1.0.0 by mrhappyasthma
+Version 1.1.0-%i.%i.%i_%s
+by 卧看微尘 @wokan
+Based on DS savegame manager by Pokedoc
+按(B)键继续
+准备写入存档。\n请稍等...
+正在写入存档。\n请稍等...
+配信完成
+
+模式:
+内存:
+--- 卡槽 1 ---
+游戏ID:
+游戏Name:
+游戏存档:
+特殊:-？
+--- 卡槽 2 ---
+
+插入卡带无效!
+插入下列任意卡带后按START键:
+宝可梦 红宝石
+宝可梦 蓝宝石
+宝可梦 绿宝石 
+宝可梦 火红 
+宝可梦 叶绿
+载入卡带ing
+红宝石/蓝宝石/绿宝石/火红/叶绿存档无效
+存档未开启神秘事件
+存档未开启神秘礼物
+
+选择配信:
+无限船票 9fb9babb
+极光船票 bcbdbabb
+神秘船票 aeafbabb
+古航海图 bebfc0c1
+E卡树果: 4594c2c33a20
+瓜南果 c4c5c329202020
+无青果 9fc6c329202020
+子茄果 c7c8c329202020
+宛豆果 c9cac329202020
+灯浆果 cbccc329202020
+泥豆果 cdcac329202020
+葱首果 cecfc329202020
+角豆果 d0cac329202020
+菩达果 d1d2c329202020
+辛子果 d3c7c329202020
+蒜蒜果 d4d4c329202020
+薯薯果 d5d5c329202020
+カチャのみ d6d7d8d9da
+ブーカのみ dbdcd6d9da
+ビスナのみ dddedfd9da
+エドマのみ e1e2e3d9da
+ホズのみ   e3e4d9da20
+ラッカのみ e5e6d6d9da
+ギネマのみ e7e8e2d9da
+クオのみ   e9ead9da20
+ヤゴのみ   ebecd9da20
+トウガのみ edeeefd9da
+ニニクのみ f0f0e9d9da
+トポのみ   edf1d9da20
+按START键切换卡带

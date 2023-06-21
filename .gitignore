@@ -8,3 +8,6 @@ savegame_manager.nds
 *.elf
 *.nds
 *.DS_Store
+*.bak
+.vscode
+.vs

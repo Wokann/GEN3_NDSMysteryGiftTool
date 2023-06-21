@@ -31,12 +31,16 @@ const char *strings_fallback[STR_LAST] = {
     /* STR_EMPTY */ "",
     /* STR_STR */ "%s",
     //
-    /* f */
-    //"GEN3~]#\n"//"å®å¯æ¢¦GEN3è‡ªåˆ¶é…ä¿¡å™¨"
-    "Pokemon Generation 3 Event Distribution\n"
-    "by suloku and mrhappyasthma.\n"
-    "Version %i.%i.%i%s by wokann.\n"
-    "Based on DS savegame manager by Pokedoc.",
+    /* STR_TITLE_MSG */
+    ////ENG_TEXT_START
+    "Pokemon Generation 3 Event Distribution by suloku.\n"
+    ////ENG_TEXT_END
+    /*//CHS_TEXT_START
+    "€‚GEN3ƒ„…†‡ by suloku.                           \n"//"å®å¯æ¢¦GEN3è‡ªåˆ¶é…ä¿¡å™¨
+    *///CHS_TEXT_END
+    "Version 1.0.0 by mrhappyasthma\n"
+    "Version 1.1.0-%i.%i.%i_%s\nby ˆ‰Š‹ @wokann\n"
+    "Based on DS savegame manager by Pokedoc",
     /* STR_BOOT_NO_INI */
     "Unable to open ini file!\nPlease make sure that it is\n1. in this apps "
     "folder, or"
@@ -69,8 +73,20 @@ const char *strings_fallback[STR_LAST] = {
     "ERROR: Unable to get an unused nfilename! This means that you have more "
     "than 65536 saves!\n(wow!)",
     //
-    /* STR_HW_FORMAT_GAME */ "Preparing to write to your game.\nPlease wait...",
-    /* STR_HW_WRITE_GAME */ "Writing save to your game.\nPlease wait...",
+    /* STR_HW_FORMAT_GAME */ 
+    ////ENG_TEXT_START
+    "Preparing to write to your game.\nPlease wait...",
+    ////ENG_TEXT_END
+    /*//CHS_TEXT_START
+    //"ôõö˜™.                         \n÷øù...        ",//å‡†å¤‡å†™å…¥å­˜æ¡£ã€‚\nè¯·ç¨ç­‰...
+    *///CHS_TEXT_END
+    /* STR_HW_WRITE_GAME */ 
+    ////ENG_TEXT_START
+    "Writing save to your game.\nPlease wait...",
+    ////ENG_TEXT_END
+    /*//CHS_TEXT_START
+    "úûö˜™.                   \n÷øù...        ",//æ­£åœ¨å†™å…¥å­˜æ¡£ã€‚\nè¯·ç¨ç­‰...
+    *///CHS_TEXT_END
     /* STR_HW_READ_GAME */ "Reading save from your game.\nPlease wait...",
     /* STR_HW_WRITE_FILE */ "Writing file:\n%s",
     /* STR_HW_READ_FILE */ "Reading file:\n%s",

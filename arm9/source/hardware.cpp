@@ -1024,7 +1024,12 @@ void GBA_read_inject_restore(u8 type, char *ticket, SupportedGames games, Langua
     displayMessage2F(STR_HW_WRITE_GAME);
     gbaWriteSave(0, data, size, type);
 
+////ENG_TEXT_START
     displayStateF(STR_STR, "Done!");
+////ENG_TEXT_END
+/*//CHS_TEXT_START
+    displayStateF(STR_STR, "…†üı!");//é…ä¿¡å®Œæˆ
+*///CHS_TEXT_END
   }
 }
 

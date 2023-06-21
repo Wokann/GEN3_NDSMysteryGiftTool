@@ -64,7 +64,7 @@ void displayInit() {
 //===========================================================
 //ENG_TEXT_START
 //===========================================================
-
+//
 void displayTitle() {
   displayMessageF(STR_TITLE_MSG, VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO,
                   VERSION_EXTRA);
@@ -326,7 +326,7 @@ void displayPrintUpper(bool fc) {
     sprintf(name, "----");
   if (dstype == 0) iprintf(name);
 }
-//ENG_TEXT
+
 void displayChangeCart(int mode) {
   consoleSelect(&lowerScreen);
   consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
@@ -393,18 +393,18 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
       switch (games) {
         case RUBY_AND_SAPPHIRE:
           iprintf("    Eon Ticket\n");
-          iprintf("    E-Berry: Pumkin\n");
-          iprintf("    E-Berry: Drash\n");
-          iprintf("    E-Berry: Eggant\n");
-          iprintf("    E-Berry: Strib\n");
-          iprintf("    E-Berry: Chilan\n");
-          iprintf("    E-Berry: Nutpea\n");
-          iprintf("    E-Berry: Ginema\n");
-          iprintf("    E-Berry: Kuo\n");
-          iprintf("    E-Berry: Yago\n");
-          iprintf("    E-Berry: Touga\n");
-          iprintf("    E-Berry: Niniku\n");
-          iprintf("    E-Berry: Topo\n");
+          iprintf("    E-Berry: Ö×ØÙÚ(Pumkin)\n");
+          iprintf("    E-Berry: ÛÜÖÙÚ(Drash )\n");
+          iprintf("    E-Berry: İŞßÙÚ(Eggant)\n");
+          iprintf("    E-Berry: áâãÙÚ(Strib )\n");
+          iprintf("    E-Berry: ãäÙÚ (Chilan)\n");
+          iprintf("    E-Berry: åæÖÙÚ(Nutpea)\n");
+          iprintf("    E-Berry: çèâÙÚ(Ginema)\n");
+          iprintf("    E-Berry: éêÙÚ (Kuo   )\n");
+          iprintf("    E-Berry: ëìÙÚ (Yago  )\n");
+          iprintf("    E-Berry: íîïÙÚ(Touga )\n");
+          iprintf("    E-Berry: ğğéÙÚ(Niniku)\n");
+          iprintf("    E-Berry: íñÙÚ (Topo  )\n");
           break;
         case EMERALD:
           iprintf("    Eon Ticket\n");
@@ -423,12 +423,12 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
         case RUBY_AND_SAPPHIRE:
           iprintf("    Eon Ticket (e-card)\n");
           iprintf("    Eon Ticket (nintendo Italy)\n");
-          iprintf("    E-Berry: Pumkin\n");
-          iprintf("    E-Berry: Drash\n");
-          iprintf("    E-Berry: Eggant\n");
-          iprintf("    E-Berry: Strib\n");
-          iprintf("    E-Berry: Chilan\n");
-          iprintf("    E-Berry: Nutpea\n");
+          iprintf("    E-Berry: Pumkin(Ö×ØÙÚ)\n");
+          iprintf("    E-Berry: Drash (ÛÜÖÙÚ)\n");
+          iprintf("    E-Berry: Eggant(İŞßÙÚ)\n");
+          iprintf("    E-Berry: Strib (áâãÙÚ)\n");
+          iprintf("    E-Berry: Chilan(ãäÙÚ )\n");
+          iprintf("    E-Berry: Nutpea(åæÖÙÚ)\n");
           break;
         case EMERALD:
           iprintf("    Aurora Ticket\n");
@@ -446,12 +446,12 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
       switch (games) {
         case RUBY_AND_SAPPHIRE:
           iprintf("    Eon Ticket\n");
-          iprintf("    E-Berry: Pumkin\n");
-          iprintf("    E-Berry: Drash\n");
-          iprintf("    E-Berry: Eggant\n");
-          iprintf("    E-Berry: Strib\n");
-          iprintf("    E-Berry: Chilan\n");
-          iprintf("    E-Berry: Nutpea\n");
+          iprintf("    E-Berry: Pumkin(Ö×ØÙÚ)\n");
+          iprintf("    E-Berry: Drash (ÛÜÖÙÚ)\n");
+          iprintf("    E-Berry: Eggant(İŞßÙÚ)\n");
+          iprintf("    E-Berry: Strib (áâãÙÚ)\n");
+          iprintf("    E-Berry: Chilan(ãäÙÚ )\n");
+          iprintf("    E-Berry: Nutpea(åæÖÙÚ)\n");
           break;
         case EMERALD:
           iprintf("    Aurora Ticket\n");
@@ -476,7 +476,7 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
   }
   iprintf("-->");
 }
-
+//
 //===========================================================
 //ENG_TEXT_END
 //===========================================================
@@ -489,7 +489,7 @@ void displayTitle() {
   displayMessageF(STR_TITLE_MSG, VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO,
                   VERSION_EXTRA);
 
-  displayStateF(STR_STR, "(B)!");//"æŒ‰(B)!"
+  displayStateF(STR_STR, "Œ(B)!             ");//"æŒ‰(B)!"
   while (!(keysCurrent() & KEY_B))
     ;
 }
@@ -502,25 +502,25 @@ void displayPrintUpper(bool fc) {
   consoleSelect(&upperScreen);
   consoleSetWindow(&upperScreen, 0, 0, 32, 24);
   consoleClear();
-  iprintf("Mode     :\n");
-  iprintf("Memory   :\n");
-  iprintf("--- SLOT 1 ---------------------");
-  iprintf("{@ID     :\n");//"æ¸¸æˆID     :"
-  iprintf("{@Name   :\n");//"æ¸¸æˆName   :"
-  iprintf("{@'     :\n");//"æ¸¸æˆå­˜æ¡£     :"
-  iprintf("Special  :\n");
+  iprintf("‘       :\n");
+  iprintf("’“       :\n");
+  iprintf("---  ”•  1 ---------------------");
+  iprintf("–— ID    :\n");//"æ¸¸æˆID     :"
+  iprintf("–— name  :\n");//"æ¸¸æˆName   :"
+  iprintf("–— ˜™    :\n");//"æ¸¸æˆå­˜æ¡£     :"
+  iprintf("š›       :\n");
   if (dstype == 1) {
     // DSi mode
     iprintf("--- SD-SLOT --------------------");
     iprintf("Status   :\n");
   } else {
     // old DS phat/lite
-    iprintf("--- SLOT 2 ---------------------");
-    iprintf("{@ID     :\n");//"æ¸¸æˆID     :"
-    iprintf("{@Name   :\n");//"æ¸¸æˆName   :"
-    iprintf("{@'     :\n");//"æ¸¸æˆå­˜æ¡£     :"
+    iprintf("---  ”•  2 ---------------------");
+    iprintf("–— ID    :\n");//"æ¸¸æˆID     :"
+    iprintf("–— name  :\n");//"æ¸¸æˆName   :"
+    iprintf("–— ˜™    :\n");//"æ¸¸æˆå­˜æ¡£     :"
     
-    iprintf("Special  :\n");
+    iprintf("š›       :\n");
   }
 
   // print upper screen
@@ -755,15 +755,15 @@ void displayChangeCart(int mode) {
 
   iprintf("\n\n");
   if (mode)
-    printf("$=\\!\n\n");//"æ’å…¥å¡å¸¦æ— æ•ˆ!"
+    printf("œ”Ÿ !                         \n\n");//"æ’å…¥å¡å¸¦æ— æ•ˆ!"
   else
     printf("\n\n");
-  iprintf("$START:\n\n");//"æ’å…¥å¡å¸¦æŒ‰START:"
-  iprintf("     -  &\n");//"å®å¯æ¢¦ çº¢å®çŸ³"
-  iprintf("     -  &\n");//"å®å¯æ¢¦ è“å®çŸ³"
-  iprintf("     -  &\n");//"å®å¯æ¢¦ ç»¿å®çŸ³"
-  iprintf("     -  \n");//"å®å¯æ¢¦ ç«çº¢"
-  iprintf("     -  _\n");//"å®å¯æ¢¦ å¶ç»¿"
+  iprintf("œ¡¢£¤”¥                     \nŒSTART:    \n\n");//"æ’å…¥å¡å¸¦æŒ‰START:"
+  iprintf("     - €‚ ¦§¨     \n");//"å®å¯æ¢¦ çº¢å®çŸ³"
+  iprintf("     - €‚ ©§¨         \n");//"å®å¯æ¢¦ è“å®çŸ³"
+  iprintf("     - €‚ ª§¨        \n");//"å®å¯æ¢¦ ç»¿å®çŸ³"
+  iprintf("     - €‚ «¦         \n");//"å®å¯æ¢¦ ç«çº¢"
+  iprintf("     - €‚ ¬ª           \n");  //"å®å¯æ¢¦ å¶ç»¿"
   
 }
 
@@ -771,7 +771,7 @@ void displayLoadingCart() {
   consoleSelect(&lowerScreen);
   consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
   consoleClear();
-  printf("|$ing...");//"è½½å…¥å¡å¸¦ing..."
+  printf("­”ing...           ");//"è½½å…¥å¡å¸¦ing..."
 }
 
 void sleep(int seconds) {
@@ -791,15 +791,15 @@ void displayPrintTicketError(int error) {
   switch (error) {
     case -1:
       //"çº¢å®çŸ³/è“å®çŸ³/ç»¿å®çŸ³/ç«çº¢/å¶ç»¿å­˜æ¡£æ— æ•ˆ"
-      iprintf("&/&/&//_'=\\!\n");
+      iprintf("¦§¨/©§¨/ª§¨/«¦/¬ª  \n˜™Ÿ !                    \n");
       break;
     case -2:
       //"ç¥ç§˜äº‹ä»¶æœªå¼€"
-      iprintf(",;!\n");
+      iprintf("˜™²³´                       \n®¯°±!       \n");
       break;
     case -3:
       //"ç¥ç§˜ç¤¼ç‰©æœªå¼€"
-      iprintf("`;!\n");
+      iprintf("˜™²³´                      \n®¯µ¶!       \n");
       break;
   }
   
@@ -811,91 +811,87 @@ void displayPrintTickets(int cursor_position, SupportedGames games, Language lan
   consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
   consoleClear();
 
-  iprintf("^}]:\n\n");//"é€‰æ‹©é…ä¿¡:"
-//æ— é™èˆ¹ç¥¨ \03D\05B\005\022
-//æå…‰èˆ¹ç¥¨ \011\00B\005\022
-//ç¥ç§˜èˆ¹ç¥¨ \01D\01C\005\022
-//å¤èˆªæµ·å›¾ \003\03C\00C\012
+  iprintf("·¸…†:             \n\n");
 
   switch (language) {
     case JAPANESE:
       switch (games) {
         case RUBY_AND_SAPPHIRE:
-          iprintf("    =[\"\n");//"æ— é™èˆ¹ç¥¨"
-          iprintf("    E-Berry: Pumkin\n");
-          iprintf("    E-Berry: Drash\n");
-          iprintf("    E-Berry: Eggant\n");
-          iprintf("    E-Berry: Strib\n");
-          iprintf("    E-Berry: Chilan\n");
-          iprintf("    E-Berry: Nutpea\n");
-          iprintf("    E-Berry: Ginema\n");
-          iprintf("    E-Berry: Kuo\n");
-          iprintf("    E-Berry: Yago\n");
-          iprintf("    E-Berry: Touga\n");
-          iprintf("    E-Berry: Niniku\n");
-          iprintf("    E-Berry: Topo\n");
+          iprintf("    Ÿ¹º»      \n");//"æ— é™èˆ¹ç¥¨"
+          iprintf("    E”ÂÃ: Ö×ØÙÚ(ÄÅÃ)      \n");
+          iprintf("    E”ÂÃ: ÛÜÖÙÚ(ŸÆÃ)      \n");
+          iprintf("    E”ÂÃ: İŞßÙÚ(ÇÈÃ)      \n");
+          iprintf("    E”ÂÃ: áâãÙÚ(ÉÊÃ)      \n");
+          iprintf("    E”ÂÃ: ãäÙÚ (ËÌÃ)      \n");
+          iprintf("    E”ÂÃ: åæÖÙÚ(ÍÊÃ)      \n");
+          iprintf("    E”ÂÃ: çèâÙÚ(ÎÏÃ)      \n");
+          iprintf("    E”ÂÃ: éêÙÚ (ĞÊÃ)      \n");
+          iprintf("    E”ÂÃ: ëìÙÚ (ÑÒÃ)      \n");
+          iprintf("    E”ÂÃ: íîïÙÚ(ÓÇÃ)      \n");
+          iprintf("    E”ÂÃ: ğğéÙÚ(ÔÔÃ)      \n");
+          iprintf("    E”ÂÃ: íñÙÚ (ÕÕÃ)      \n");
           break;
         case EMERALD:
-          iprintf("    =[\"\n");//"æ— é™èˆ¹ç¥¨"
-          iprintf("    \" 2005\n");//"ç¥ç§˜èˆ¹ç¥¨ 2005"
-          iprintf("    <\n");//"å¤èˆªæµ·å›¾"
-          iprintf("    \" (unofficial)\n");//"æå…‰èˆ¹ç¥¨ (unofficial)"
+          iprintf("    Ÿ¹º»      \n");//"æ— é™èˆ¹ç¥¨"
+          iprintf("    ®¯º» 2005         \n");//"ç¥ç§˜èˆ¹ç¥¨ 2005"
+          iprintf("    ¾¿ÀÁ       \n");//"å¤èˆªæµ·å›¾"
+          iprintf("    ¼½º» (unofficial)         \n");//"æå…‰èˆ¹ç¥¨ (unofficial)"
           break;
         case FIRE_RED_AND_LEAF_GREEN:
-          iprintf("    \" 2004\n");//"æå…‰èˆ¹ç¥¨ 2004"
-          iprintf("    \" 2005\n");//"ç¥ç§˜èˆ¹ç¥¨ 2005"
+          iprintf("    ¼½º» 2004         \n");//"æå…‰èˆ¹ç¥¨ 2004"
+          iprintf("    ®¯º» 2005         \n");//"ç¥ç§˜èˆ¹ç¥¨ 2005"
           break;
       }
       break;
     case ENGLISH:
       switch (games) {
         case RUBY_AND_SAPPHIRE:
-          iprintf("    =[\" (e-card)\n");//"æ— é™èˆ¹ç¥¨ (e-card)"
-          iprintf("    =[\" (nintendo Italy)\n");//"æ— é™èˆ¹ç¥¨ (nintendo Italy)"
-          iprintf("    E-Berry: Pumkin\n");
-          iprintf("    E-Berry: Drash\n");
-          iprintf("    E-Berry: Eggant\n");
-          iprintf("    E-Berry: Strib\n");
-          iprintf("    E-Berry: Chilan\n");
-          iprintf("    E-Berry: Nutpea\n");
+          iprintf("    Ÿ¹º» (e”)          \n");//"æ— é™èˆ¹ç¥¨ (e-card)"
+          iprintf("    Ÿ¹º» (nintendo Italy)      \n");//"æ— é™èˆ¹ç¥¨ (nintendo Italy)"
+          iprintf("    E”ÂÃ: Pumkin(ÄÅÃ)     \n");
+          iprintf("    E”ÂÃ: Drash (ŸÆÃ)     \n");
+          iprintf("    E”ÂÃ: Eggant(ÇÈÃ)     \n");
+          iprintf("    E”ÂÃ: Strib (ÉÊÃ)     \n");
+          iprintf("    E”ÂÃ: Chilan(ËÌÃ)     \n");
+          iprintf("    E”ÂÃ: Nutpea(ÍÊÃ)     \n");
           break;
         case EMERALD:
-          iprintf("    \"\n");//"æå…‰èˆ¹ç¥¨"
-          iprintf("    \"\n");//"ç¥ç§˜èˆ¹ç¥¨"
-          iprintf("    < (unofficial)\n");//"å¤èˆªæµ·å›¾ (unofficial)"
-          iprintf("    =[\" (unofficial)\n");//"æ— é™èˆ¹ç¥¨ (unofficial)"
+          iprintf("    ¼½º»         \n");//"æå…‰èˆ¹ç¥¨"
+          iprintf("    ®¯º»         \n");//"ç¥ç§˜èˆ¹ç¥¨"
+          iprintf("    ¾¿ÀÁ (unofficial)       \n");//"å¤èˆªæµ·å›¾ (unofficial)"
+          iprintf("    Ÿ¹º» (unofficial)      \n");//"æ— é™èˆ¹ç¥¨ (unofficial)"
           break;
         case FIRE_RED_AND_LEAF_GREEN:
-          iprintf("    \"\n");//"æå…‰èˆ¹ç¥¨"
-          iprintf("    \"\n");//"ç¥ç§˜èˆ¹ç¥¨"
+          iprintf("    ¼½º»         \n");//"æå…‰èˆ¹ç¥¨"
+          iprintf("    ®¯º»         \n");//"ç¥ç§˜èˆ¹ç¥¨"
           break;
       }
       break;
     default:
       switch (games) {
         case RUBY_AND_SAPPHIRE:
-          iprintf("    =[\"\n");//"æ— é™èˆ¹ç¥¨"
-          iprintf("    E-Berry: Pumkin\n");
-          iprintf("    E-Berry: Drash\n");
-          iprintf("    E-Berry: Eggant\n");
-          iprintf("    E-Berry: Strib\n");
-          iprintf("    E-Berry: Chilan\n");
-          iprintf("    E-Berry: Nutpea\n");
+          iprintf("    Ÿ¹º»      \n");//"æ— é™èˆ¹ç¥¨"
+          iprintf("    E”ÂÃ: Pumkin(ÄÅÃ)     \n");
+          iprintf("    E”ÂÃ: Drash (ŸÆÃ)     \n");
+          iprintf("    E”ÂÃ: Eggant(ÇÈÃ)     \n");
+          iprintf("    E”ÂÃ: Strib (ÉÊÃ)     \n");
+          iprintf("    E”ÂÃ: Chilan(ËÌÃ)     \n");
+          iprintf("    E”ÂÃ: Nutpea(ÍÊÃ)     \n");
           break;
         case EMERALD:
-          iprintf("    \"\n");//"æå…‰èˆ¹ç¥¨"
-          iprintf("    \" (USA)\n");//"ç¥ç§˜èˆ¹ç¥¨ (USA)"
-          iprintf("    < (unofficial)\n");//"å¤èˆªæµ·å›¾ (unofficial)"
-          iprintf("    =[\" (unofficial)\n");//"æ— é™èˆ¹ç¥¨ (unofficial)"
+          iprintf("    ¼½º»         \n");//"æå…‰èˆ¹ç¥¨"
+          iprintf("    ®¯º» (USA)         \n");//"ç¥ç§˜èˆ¹ç¥¨ (USA)"
+          iprintf("    ¾¿ÀÁ (unofficial)       \n");//"å¤èˆªæµ·å›¾ (unofficial)"
+          iprintf("    Ÿ¹º» (unofficial)      \n");//"æ— é™èˆ¹ç¥¨ (unofficial)"
           break;
         case FIRE_RED_AND_LEAF_GREEN:
-          iprintf("    \"\n");//"æå…‰èˆ¹ç¥¨"
-          iprintf("    \" (USA)\n");//"ç¥ç§˜èˆ¹ç¥¨ (USA)"
+          iprintf("    ¼½º»         \n");//"æå…‰èˆ¹ç¥¨"
+          iprintf("    ®¯º» (USA)         \n");//"ç¥ç§˜èˆ¹ç¥¨ (USA)"
           break;
       }
       break;
   }
-  printf("\n\nSTART");//"æŒ‰STARTæ¢å¡å¸¦"
+  printf("\n\nŒSTARTòó”!                   ");//"æŒ‰STARTæ¢å¡å¸¦"
   // Print cursor
   consoleSetWindow(&lowerScreen, 0, 0, 32, 24);
   iprintf("\n\n");
@@ -1062,16 +1058,16 @@ void displayMessageF(int id, ...) {
   va_end(argp);
 
   consoleSelect(&upperScreen);
-  consoleSetWindow(&upperScreen, 0, 16, 32, 6);
+  consoleSetWindow(&upperScreen, 0, 15, 32, 7);
   consoleClear();
 
   char *start = txt;
   char *end = start + strlen(txt);
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < 7; i++) {
     int l;
     l = 32;
     start = ParseLine(start, end, l);
-    consoleSetWindow(&upperScreen, 0, i + 16, 32, 1);
+    consoleSetWindow(&upperScreen, 0, i + 15, 32, 1);
     char tmp = *(start + l);
     *(start + l) = '\0';
     iprintf(start);
