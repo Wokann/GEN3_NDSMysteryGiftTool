@@ -73,21 +73,19 @@ const char *strings_fallback[STR_LAST] = {
     "ERROR: Unable to get an unused nfilename! This means that you have more "
     "than 65536 saves!\n(wow!)",
     //
-    /* STR_HW_FORMAT_GAME */ 
+    /* STR_HW_FORMAT_GAME */
+    /* STR_HW_WRITE_GAME */
+    /* STR_HW_READ_GAME */
     ////ENG_TEXT_START
     "Preparing to write to your game.\nPlease wait...",
-    ////ENG_TEXT_END
-    /*//CHS_TEXT_START
-    //"ôõö˜™.                         \n÷øù...        ",//å‡†å¤‡å†™å…¥å­˜æ¡£ã€‚\nè¯·ç¨ç­‰...
-    *///CHS_TEXT_END
-    /* STR_HW_WRITE_GAME */ 
-    ////ENG_TEXT_START
     "Writing save to your game.\nPlease wait...",
+    "Reading save from your game.\nPlease wait...",
     ////ENG_TEXT_END
     /*//CHS_TEXT_START
+    "ôõö˜™.                   \n÷øù...              ",//å‡†å¤‡å†™å…¥å­˜æ¡£ã€‚\nè¯·ç¨ç­‰...
     "úûö˜™.                   \n÷øù...        ",//æ­£åœ¨å†™å…¥å­˜æ¡£ã€‚\nè¯·ç¨ç­‰...
+    "úû­˜™.                   \n÷øù...        ",//æ­£åœ¨è½½å…¥å­˜æ¡£ã€‚\nè¯·ç¨ç­‰...
     *///CHS_TEXT_END
-    /* STR_HW_READ_GAME */ "Reading save from your game.\nPlease wait...",
     /* STR_HW_WRITE_FILE */ "Writing file:\n%s",
     /* STR_HW_READ_FILE */ "Reading file:\n%s",
     //
